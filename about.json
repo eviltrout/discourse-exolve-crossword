@@ -1,0 +1,10 @@
+{
+  "about_url": "https://github.com/eviltrout/discourse-exolve-crossword",
+  "license_url": null,
+  "assets": {
+    "exolve_js": "assets/exolve-m.js",
+    "exolve_css": "assets/exolve-m.css",
+  },
+  "name": "discourse-exolve-crossword",
+  "component": true
+}
