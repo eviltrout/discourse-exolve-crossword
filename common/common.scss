@@ -1,3 +1,7 @@
+pre[data-code-wrap="exolve-crossword"] {
+    display: none;
+}
+
 /*
 MIT License
 
@@ -8,11 +12,6 @@ See the full license notice in exolve-m.js.
 Version: Exolve v1.50 May 16, 2023
 */
 
-@media (max-width: 500px) {
-  body {
-    margin: 4px;
-  }
-}
 .xlv-frame {
   font-size: 16px;
   font-family: serif;
