@@ -560,15 +560,10 @@ Exolve.prototype.init = function() {
                     style="display:none">${this.textLabels['check']}</button>
                 <button id="${this.prefix}-check-all" class="xlv-button"
                   style="display:none">${this.textLabels['check-all']}</button>
-              </div> <!-- xlv-button-row-1 -->
-              <div id="${this.prefix}-buttons-extra-row" class="xlv-controls-row"
-                    style="display:none">
                 <button id="${this.prefix}-checkcell" class="xlv-button"
                     style="display:none">${this.textLabels['checkcell']}</button>
                 <button id="${this.prefix}-revealcell" class="xlv-button"
                     style="display:none">${this.textLabels['revealcell']}</button>
-              </div>
-              <div id="${this.prefix}-button-row-2" class="xlv-controls-row">
                 <button id="${this.prefix}-reveal" class="xlv-button"
                     style="display:none">${this.textLabels['reveal']}</button>
                 <button id="${this.prefix}-ninas" class="xlv-button"
@@ -4181,7 +4176,7 @@ Exolve.prototype.computeGridSize = function(maxDim) {
   this.numberSize = 1 + Math.max(5, Math.floor(this.squareDim / 3) - 1);
   this.arrowSize = Math.max(6, Math.floor(13 * this.squareDim / 31));
   this.currClueWidth = Math.max(this.boxWidth + (2 * this.offsetLeft),
-                                Math.min(viewportDim - 30, 450));
+                                Math.min(viewportDim - 30, 680));
 }
 
 Exolve.prototype.setColumnLayout = function() {

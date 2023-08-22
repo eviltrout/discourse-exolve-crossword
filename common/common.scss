@@ -2,6 +2,13 @@ pre[data-code-wrap="exolve-crossword"] {
     display: none;
 }
 
+.xlv-small-print {
+    display: none;
+}
+
+.xlv-status {
+    display: none;
+}
 /*
 MIT License
 
@@ -14,7 +21,6 @@ Version: Exolve v1.50 May 16, 2023
 
 .xlv-frame {
   font-size: 16px;
-  font-family: serif;
   font-weight: 400;
   line-height: normal;
   box-sizing: border-box;
@@ -46,6 +52,7 @@ Version: Exolve v1.50 May 16, 2023
 }
 .xlv-clues-panel {
   margin: 0 0 8px 0;
+  display: none;
 }
 
 @media (max-width: 325px) {
@@ -81,7 +88,6 @@ Version: Exolve v1.50 May 16, 2023
 @media (min-width: 326px) and (max-width: 500px) {
   .xlv-wide-box {
     width: 100%;
-    max-width: 480px;
   }
   .xlv-button {
     font-size: 11px;
@@ -93,24 +99,12 @@ Version: Exolve v1.50 May 16, 2023
   }
 }
 
-@media (min-width: 501px) {
-  .xlv-wide-box {
-    width: 480px;
-  }
-  .xlv-button {
+.xlv-wide-box {
+}
+.xlv-button {
     font-size: 14px;
     padding: 8px;
     border-radius: 12px;
-  }
-  .xlv-grid-panel {
-    margin: 0 12px 0 0;
-  }
-  .xlv-clues-panel {
-    margin: 0 12px 8px 0;
-  }
-  .xlv-preamble {
-    margin: 8px 20px 0;
-  }
 }
 
 .xlv-cell-num {
@@ -181,6 +175,7 @@ Version: Exolve v1.50 May 16, 2023
 }
 .xlv-grid-panel {
   break-inside: avoid;
+  width: 100%;
 }
 .xlv-flex-col {
   display: flex;
@@ -242,12 +237,15 @@ Version: Exolve v1.50 May 16, 2023
   font-weight: bold;
   margin: 0;
   overflow-y: auto;
-  padding: 2px 0 8px 0 !important;
-  position: sticky;
-  position: -webkit-sticky;
   text-align: left;
   word-wrap: break-word;
-  z-index: 2;
+  display: flex;
+  margin-bottom: 1em;
+
+  > span:first-of-type {
+      white-space:nowrap;
+      margin-right: 1em;
+  }
 }
 .xlv-curr-orphan,
 .xlv-curr-clue-label {
@@ -347,6 +345,7 @@ Version: Exolve v1.50 May 16, 2023
   cursor: pointer;
 }
 .xlv-button:disabled {
+  display: none;
   cursor: not-allowed;
 }
 .xlv-frame .xlv-small-button {
@@ -355,7 +354,7 @@ Version: Exolve v1.50 May 16, 2023
   box-shadow: none;
   display: inline-block;
   font-family: monospace;
-  font-size: 13px;
+  font-size: 20px;
   font-weight: bold;
   line-height: normal;
   margin: 0;
@@ -367,10 +366,6 @@ Version: Exolve v1.50 May 16, 2023
 }
 .xlv-small-button:hover {
   cursor: pointer;
-}
-.xlv-small-print .xlv-small-button,
-.xlv-curr-clue .xlv-small-button {
-  font-size: 10px;
 }
 .xlv-coloured-cell {
   position: absolute;

@@ -8,6 +8,16 @@ let enc = new TextEncoder();
 let puzzles = {};
 let code = {};
 
+const options = `
+   exolve-option: font-family:inherit
+   exolve-option: color-imp-text:white color-currclue:transparent color-button:#193f47 color-button-text:white
+   exolve-option: color-button-hover:#2b5b65 color-small-button:#193f47 color-small-button-hover:#2b5b65 color-small-button-text:white
+   exolve-relabel:
+     clear-all: Clear all
+     check-all: Check all
+     reveal-all: Reveal all
+`;
+
 class PuzUploadProcessor extends UploadPreProcessorPlugin {
     static pluginId = "puz-uploader";
 
@@ -52,24 +62,27 @@ async function applyExolve(element, key) {
 		}
 		let exolveCode = code.textContent || "";
 
+        // Weird that the api is newline based
+        exolveCode = exolveCode.replace("exolve-begin\n", "exolve-begin\n" + options);
+
         let id = "crossword-" + key + "-" + puzId;
 
         let targetElem = document.getElementById(id);
         if (!targetElem) {
             targetElem = document.createElement('div');
             targetElem.id = id;
-            ex.parentElement.prepend(targetElem);
+            ex.parentElement.insertBefore(targetElem, ex);
         }
 
         if (key !== 'composer') {
             let crossword;
-            if (puzzles[id]) {
-                crossword = exolvePuzzles[puzzles[id]];
+            if (puzzles[puzId]) {
+                crossword = exolvePuzzles[puzzles[puzId]];
                 crossword.destroy();
             }
             crossword = createExolve(exolveCode, id);
             if (crossword) {
-                puzzles[id] = crossword.id;
+                puzzles[puzId] = crossword.id;
             }
         } else {
             targetElem.innerText = '[ crossword will appear here on save ]';
@@ -82,8 +95,10 @@ export default apiInitializer("1.9.0", (api) => {
     api.addComposerUploadPreProcessor(PuzUploadProcessor, (h) => h);
 
     api.addComposerUploadMarkdownResolver(upload => {
-      let id = upload.short_url.replace('upload://', '').replace('.puz', '');
-      return("```exolve-crossword puzzle-id=" + id + "\n" + code[upload.original_filename] + "\n```\n" + getUploadMarkdown(upload));
+      if (upload.extension === 'puz') {
+          let id = upload.short_url.replace('upload://', '').replace('.puz', '');
+          return("```exolve-crossword puzzle-id=" + id + "\n" + code[upload.original_filename] + "\n```\n" + getUploadMarkdown(upload));
+      }
     });
 
 	api.decorateCookedElement(
